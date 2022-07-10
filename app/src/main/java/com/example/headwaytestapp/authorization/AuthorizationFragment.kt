@@ -16,14 +16,29 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import com.google.firebase.auth.FirebaseAuth
+
+import com.google.firebase.auth.FirebaseUser
+
+
+
 
 @AndroidEntryPoint
 class AuthorizationFragment : BaseFragment<ViewAuthorizationBinding>() {
 
     private val viewModel: AuthorizationViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            saveCredsOpenRepositoryList("")
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding?.loginButton?.setOnClickListener {
             onLoginButtonClicked()
             viewLifecycleOwner.lifecycleScope.launch {
