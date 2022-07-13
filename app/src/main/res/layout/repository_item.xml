@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="repositoryItem"
+            type="com.example.headwaytestapp.dao.Repository" />
+
+        <import type="android.view.View" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginHorizontal="15dp">
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@color/line_color"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/githubLogo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_github_repo"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repository_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@{repositoryItem.fullName}"
+        android:textColor="@color/repository_title_blue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/githubLogo"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repository_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@{repositoryItem.description}"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/githubLogo"
+        app:layout_constraintTop_toBottomOf="@id/repository_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repository_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@{repositoryItem.language}"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/githubLogo"
+        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+
+    <ImageView
+        android:id="@+id/repo_star"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintStart_toEndOf="@id/repository_language"
+        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repo_star_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@{String.valueOf(repositoryItem.stars)}"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/repo_star"
+        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@{repositoryItem.date}"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/repo_star_number"
+        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/viewed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Viewed"
+        android:visibility="gone"
+        android:textColor="@color/purple_500"
+        android:textSize="15sp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/repository_description"
+        app:layout_constraintBottom_toBottomOf="@+id/updated"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

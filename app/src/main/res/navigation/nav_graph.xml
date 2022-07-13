@@ -11,9 +11,21 @@
             android:id="@+id/toShowRepositoryFragment"
             app:destination="@id/showRepositoryFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/showRepositoryFragment"
         android:name="com.example.headwaytestapp.show_repos.ShowRepositoryFragment"
         android:label="ShowRepositoryFragment" >
+        <action android:id="@+id/toLatestSearchReposFragment"
+            app:destination="@+id/latestSearchReposFragment"/>
+
+        <action android:id="@+id/openBrowser" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/latestSearchReposFragment"
+        android:name="com.example.headwaytestapp.LatestSearchReposFragment"
+        android:label="LatestSearchReposFragment">
+        <action android:id="@+id/openBrowser" />
     </fragment>
 </navigation>

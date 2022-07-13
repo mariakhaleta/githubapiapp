@@ -3,4 +3,5 @@
     <string name="login">Login</string>
     <string name="type_github_email">Type Github email</string>
     <string name="please_signin_with_github">Please, signin with GitHub</string>
+    <string name="no_language">No language</string>
 </resources>

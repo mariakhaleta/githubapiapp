@@ -1,7 +1,8 @@
 package com.example.headwaytestapp.di
 
-import com.example.headwaytestapp.authorization.GithubApi
-import com.example.headwaytestapp.show_repos.MainRepository
+import com.example.headwaytestapp.dao.RepositoryDAO
+import com.example.headwaytestapp.network.GithubApi
+import com.example.headwaytestapp.repository.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +15,6 @@ class RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun provideMainRepository(githubApi: GithubApi): MainRepository = MainRepository(githubApi)
+    fun provideMainRepository(githubApi: GithubApi, repositoryDAO: RepositoryDAO): MainRepository =
+        MainRepository(githubApi, repositoryDAO)
 }
