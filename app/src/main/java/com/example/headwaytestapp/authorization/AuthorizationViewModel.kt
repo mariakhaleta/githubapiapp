@@ -31,7 +31,7 @@ class AuthorizationViewModel @Inject() constructor() : ViewModel() {
         if (pendingResultTask != null) {
             pendingResultTask
                 .addOnSuccessListener{
-                    _authorizationUiState.value = UiStateManager.SuccessLogIn(it.credential?.signInMethod!!)
+                    _authorizationUiState.value = UiStateManager.SuccessLogIn
                     }
                 .addOnFailureListener{
                     _authorizationUiState.value = UiStateManager.ErrorLogIn(it.message)
@@ -40,5 +40,4 @@ class AuthorizationViewModel @Inject() constructor() : ViewModel() {
             _authorizationUiState.value = UiStateManager.OpenLogIn(provider)
         }
     }
-
 }
