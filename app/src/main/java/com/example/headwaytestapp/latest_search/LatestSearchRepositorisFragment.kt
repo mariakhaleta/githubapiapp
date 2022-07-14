@@ -1,4 +1,4 @@
-package com.example.headwaytestapp
+package com.example.headwaytestapp.latest_search
 
 import android.content.Intent
 import android.net.Uri
@@ -9,8 +9,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.headwaytestapp.BaseFragment
+import com.example.headwaytestapp.R
 import com.example.headwaytestapp.databinding.ViewLatestSearchListBinding
-import com.example.headwaytestapp.latest_search.LatestSearchReposViewModel
 import com.example.headwaytestapp.dao.Repository
 import com.example.headwaytestapp.show_repos.RepositoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,8 +31,17 @@ class LatestSearchReposFragment : BaseFragment<ViewLatestSearchListBinding>() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.repoListState.collect{  adapter.submitList(it) }
+                viewModel.repoListState.collect { showList(it) }
             }
+        }
+    }
+
+    private fun showList(list: List<Repository>) {
+        if (list.isNullOrEmpty()) {
+            binding?.noSavedReposText?.visibility = View.VISIBLE
+        } else {
+            binding?.noSavedReposText?.visibility = View.GONE
+            adapter.submitList(list)
         }
     }
 
