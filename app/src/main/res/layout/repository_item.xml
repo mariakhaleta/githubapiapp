@@ -14,8 +14,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginHorizontal="15dp">
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp">
 
     <LinearLayout
         android:id="@+id/line"
@@ -59,9 +59,11 @@
         android:layout_marginTop="5dp"
         android:text="@{repositoryItem.description}"
         android:textColor="@color/black"
+        android:layout_marginEnd="15dp"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@id/githubLogo"
-        app:layout_constraintTop_toBottomOf="@id/repository_title" />
+        app:layout_constraintStart_toStartOf="@id/repository_title"
+        app:layout_constraintTop_toBottomOf="@id/repository_title"
+        app:toVisibleGone="@{!repositoryItem.description.empty}" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/repository_language"
@@ -73,7 +75,8 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/githubLogo"
-        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+        app:layout_constraintTop_toBottomOf="@id/repository_description"
+        app:toVisibleGone="@{!repositoryItem.language.empty}" />
 
     <ImageView
         android:id="@+id/repo_star"
@@ -83,7 +86,8 @@
         android:layout_marginTop="2dp"
         android:src="@drawable/ic_star"
         app:layout_constraintStart_toEndOf="@id/repository_language"
-        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+        app:layout_constraintTop_toBottomOf="@id/repository_description"
+        app:toVisibleGone="@{!String.valueOf(repositoryItem.stars).empty}" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/repo_star_number"
@@ -94,7 +98,9 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/repo_star"
-        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+        app:layout_constraintTop_toBottomOf="@id/repository_description"
+        app:layout_goneMarginLeft="0dp"
+        app:toVisibleGone="@{!String.valueOf(repositoryItem.stars).empty}" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/updated"
@@ -102,25 +108,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:text="@{repositoryItem.date}"
+        android:text="@{repositoryItem.correctFormatDate}"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/repo_star_number"
-        app:layout_constraintTop_toBottomOf="@id/repository_description" />
+        app:layout_constraintTop_toBottomOf="@id/repository_description"
+        app:toVisibleGone="@{!repositoryItem.correctFormatDate.empty}"/>
 
-    <com.google.android.material.textview.MaterialTextView
+    <ImageView
         android:id="@+id/viewed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:text="Viewed"
+        android:src="@drawable/ic_baseline_viewed"
         android:visibility="gone"
-        android:textColor="@color/purple_500"
-        android:textSize="15sp"
+        app:tint="@color/black"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/repository_description"
+        app:layout_constraintTop_toBottomOf="@id/repository_description"
         app:layout_constraintBottom_toBottomOf="@+id/updated"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

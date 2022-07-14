@@ -5,10 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -20,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.RecyclerView
 import com.example.headwaytestapp.dao.Repository
+import com.example.headwaytestapp.network.NetworkUtils
 
 
 @AndroidEntryPoint
@@ -29,26 +34,18 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
     private val adapter = RepositoryAdapter(this::onItemClicked)
     private var currentPage = 1
     private var currentSearchKey = ""
-    private var loading = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initPostsRecyclerView()
+        initNetworkChangesListener()
 
         binding?.search?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     viewModel.searchRepos(v?.text.toString(), currentPage)
                     currentSearchKey = v?.text.toString()
-
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                            viewModel.repoListUiState.collect(
-                                this@ShowRepositoryFragment::handleSearchRepositories
-                            )
-                        }
-                    }
                     return true
                 }
                 return false
@@ -68,10 +65,18 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
                     }
                 }
             }
-        })
+        }) // Pagination
 
         binding?.searchLatestRepos?.setOnClickListener {
             findNavController().navigate(ShowRepositoryFragmentDirections.toLatestSearchReposFragment())
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.repoListUiState.collect(
+                    this@ShowRepositoryFragment::handleSearchRepositories
+                )
+            }
         }
     }
 
@@ -83,14 +88,17 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
     private fun handleSearchRepositories(state: UiStateManager) {
         when (state) {
             is UiStateManager.Loading -> {
+                binding?.progressBar?.visibility = VISIBLE
             }
             is UiStateManager.Success -> {
+                binding?.progressBar?.visibility = GONE
                 adapter.submitList(state.data)
             }
             is UiStateManager.Empty -> {
-                //
+                Toast.makeText(context, "Your searched key is incorrect", Toast.LENGTH_LONG).show()
             }
             is UiStateManager.Error -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -111,5 +119,16 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
 
     override fun layoutId(): Int {
         return R.layout.view_show_repository
+    }
+
+    private fun initNetworkChangesListener() {
+        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
+            if (!isConnected) {
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
+                binding?.search?.isEnabled = false
+            } else {
+                binding?.search?.isEnabled = true
+            }
+        })
     }
 }

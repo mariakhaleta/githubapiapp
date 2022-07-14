@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/latestSearchReposFragment"
-        android:name="com.example.headwaytestapp.LatestSearchReposFragment"
+        android:name="com.example.headwaytestapp.latest_search.LatestSearchReposFragment"
         android:label="LatestSearchReposFragment">
         <action android:id="@+id/openBrowser" />
     </fragment>
