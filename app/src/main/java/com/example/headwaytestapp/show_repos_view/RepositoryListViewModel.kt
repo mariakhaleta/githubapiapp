@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.show_repos
+package com.example.headwaytestapp.show_repos_view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,7 +26,11 @@ class RepositoryListViewModel @Inject constructor(private val mainRepository: Ma
         _repoListUiState.value = UiStateManager.Loading
         viewModelScope.launch {
             combineTransform(
-                mainRepository.searchRepos(searchKey, currentPage, 15), //search 30 repos in 2 request(15+15)
+                mainRepository.searchRepos(
+                    searchKey,
+                    currentPage,
+                    15
+                ), //search 30 repos in 2 request(15+15)
                 mainRepository.searchRepos(searchKey, currentPage + 1, 15)
             ) { searchResult1, searchResult2 ->
                 if (!searchResult1.isSuccessful) {
@@ -53,10 +57,11 @@ class RepositoryListViewModel @Inject constructor(private val mainRepository: Ma
                 }
 
                 if (searchResult1.isSuccessful && searchResult2.isSuccessful) {
+                    val newReposList = list1.plus(list2).sortedByDescending {
+                        it.stars
+                    }
                     _repoListState.value =
-                        _repoListState.value.plus(list1.plus(list2)).sortedByDescending {
-                            it.stars
-                        }
+                        _repoListState.value.plus(newReposList)
 
                     launch(Dispatchers.Default) {
                         mainRepository.saveLatestRepos(
@@ -85,5 +90,11 @@ class RepositoryListViewModel @Inject constructor(private val mainRepository: Ma
         } ?: run {
             errorResponse.code().toString()
         }
+    }
+
+    fun emptyResult() {
+        _repoListUiState.value = UiStateManager.Success(emptyList())
+        _repoListState.value = emptyList()
+        _repoListUiState.value = UiStateManager.Initial
     }
 }

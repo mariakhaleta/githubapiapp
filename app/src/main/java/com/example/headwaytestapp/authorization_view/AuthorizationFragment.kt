@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.authorization
+package com.example.headwaytestapp.authorization_view
 
 import android.os.Bundle
 import android.view.View

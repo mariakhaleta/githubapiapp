@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.show_repos
+package com.example.headwaytestapp.show_repos_view
 
 import android.view.LayoutInflater
 import android.view.View

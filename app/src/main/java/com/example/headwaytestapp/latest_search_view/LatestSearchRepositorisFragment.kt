@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.latest_search
+package com.example.headwaytestapp.latest_search_view
 
 import android.content.Intent
 import android.net.Uri
@@ -13,7 +13,7 @@ import com.example.headwaytestapp.BaseFragment
 import com.example.headwaytestapp.R
 import com.example.headwaytestapp.dao.Repository
 import com.example.headwaytestapp.databinding.ViewLatestSearchListBinding
-import com.example.headwaytestapp.show_repos.RepositoryAdapter
+import com.example.headwaytestapp.show_repos_view.RepositoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

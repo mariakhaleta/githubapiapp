@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.show_repos
+package com.example.headwaytestapp.show_repos_view
 
 import android.content.Intent
 import android.net.Uri
@@ -17,14 +17,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.headwaytestapp.BaseFragment
 import com.example.headwaytestapp.R
+import com.example.headwaytestapp.dao.Repository
 import com.example.headwaytestapp.databinding.ViewShowRepositoryBinding
+import com.example.headwaytestapp.network.NetworkUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import androidx.recyclerview.widget.RecyclerView
-import com.example.headwaytestapp.dao.Repository
-import com.example.headwaytestapp.network.NetworkUtils
 
 
 @AndroidEntryPoint
@@ -44,6 +44,9 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
         binding?.search?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (!currentSearchKey.equals(v?.text.toString())) {
+                        viewModel.emptyResult()
+                    } // clear result before new value
                     viewModel.searchRepos(v?.text.toString(), currentPage)
                     currentSearchKey = v?.text.toString()
                     return true
@@ -54,8 +57,7 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
 
         binding?.recyclerview?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0)
-                {
+                if (dy > 0) {
                     val totalItemCount: Int? = recyclerView.layoutManager?.itemCount
                     if (totalItemCount != null) {
                         if (latestVisibleItem() == totalItemCount - 1) {
@@ -80,6 +82,7 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
         }
     }
 
+
     private fun latestVisibleItem(): Int {
         val layoutManager = binding?.recyclerview?.layoutManager as LinearLayoutManager
         return layoutManager.findLastCompletelyVisibleItemPosition()
@@ -96,15 +99,18 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
             }
             is UiStateManager.Empty -> {
                 Toast.makeText(context, "Your searched key is incorrect", Toast.LENGTH_LONG).show()
+                binding?.progressBar?.visibility = GONE
             }
             is UiStateManager.Error -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
+                binding?.progressBar?.visibility = GONE
             }
         }
     }
 
     private fun onItemClicked(repositoryItem: Repository) {
-        val defaultBrowser = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
+        val defaultBrowser =
+            Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
         defaultBrowser.data = Uri.parse(repositoryItem.htmlUrl)
         startActivity(defaultBrowser)
     }
@@ -112,8 +118,10 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
     private fun initPostsRecyclerView() {
         binding?.apply {
             recyclerview.adapter = adapter
-            recyclerview.layoutManager = LinearLayoutManager(context,
-                LinearLayoutManager.VERTICAL ,false)
+            recyclerview.layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL, false
+            )
         }
     }
 
@@ -122,13 +130,14 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
     }
 
     private fun initNetworkChangesListener() {
-        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
-            if (!isConnected) {
-                Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
-                binding?.search?.isEnabled = false
-            } else {
-                binding?.search?.isEnabled = true
-            }
-        })
+        NetworkUtils.getNetworkLiveData(requireContext())
+            .observe(viewLifecycleOwner, Observer { isConnected ->
+                if (!isConnected) {
+                    Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
+                    binding?.search?.isEnabled = false
+                } else {
+                    binding?.search?.isEnabled = true
+                }
+            })
     }
 }

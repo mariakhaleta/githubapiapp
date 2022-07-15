@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.authorization
+package com.example.headwaytestapp.authorization_view
 
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
