@@ -94,13 +94,14 @@ class AuthorizationFragment : BaseFragment<ViewAuthorizationBinding>() {
     }
 
     private fun initNetworkChangesListener() {
-        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
-            if (!isConnected) {
-                Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
-                binding?.loginButton?.isEnabled = false
-            } else {
-                binding?.loginButton?.isEnabled = true
-            }
-        })
+        NetworkUtils.getNetworkLiveData(requireContext())
+            .observe(viewLifecycleOwner, Observer { isConnected ->
+                if (!isConnected) {
+                    Toast.makeText(context, "No internet connection", Toast.LENGTH_LONG).show()
+                    binding?.loginButton?.isEnabled = false
+                } else {
+                    binding?.loginButton?.isEnabled = true
+                }
+            })
     }
 }

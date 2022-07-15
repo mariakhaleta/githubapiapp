@@ -16,5 +16,5 @@ abstract class RepositoryDAO {
     abstract fun insertRepositories(repositoriesList: List<Repository>)
 
     @Query("SELECT * FROM repositories_list")
-    abstract fun loadLatestRepositoryList() : Flow<List<Repository>>
+    abstract fun loadLatestRepositoryList(): Flow<List<Repository>>
 }

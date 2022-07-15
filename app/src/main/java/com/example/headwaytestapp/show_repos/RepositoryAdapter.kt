@@ -13,7 +13,8 @@ import com.example.headwaytestapp.dao.Repository
 import com.example.headwaytestapp.databinding.RepositoryItemBinding
 
 
-class RepositoryAdapter(private val onItemClicked: (Repository) -> Unit) : ListAdapter<Repository, ViewHolder>(DIFF_CALLBACK) {
+class RepositoryAdapter(private val onItemClicked: (Repository) -> Unit) :
+    ListAdapter<Repository, ViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
             DataBindingUtil.inflate(
@@ -24,7 +25,8 @@ class RepositoryAdapter(private val onItemClicked: (Repository) -> Unit) : ListA
             )
         )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, ) = holder.bind(getItem(position), onItemClicked)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(getItem(position), onItemClicked)
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repository>() {
@@ -37,7 +39,8 @@ class RepositoryAdapter(private val onItemClicked: (Repository) -> Unit) : ListA
     }
 }
 
-class ViewHolder constructor(private val binding: RepositoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class ViewHolder constructor(private val binding: RepositoryItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Repository, onItemClicked: (Repository) -> Unit) {
         binding.apply {
             this.repositoryItem = item

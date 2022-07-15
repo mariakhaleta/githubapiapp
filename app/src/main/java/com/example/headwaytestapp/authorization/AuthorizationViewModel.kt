@@ -30,10 +30,10 @@ class AuthorizationViewModel @Inject() constructor() : ViewModel() {
         val pendingResultTask: Task<AuthResult>? = firebaseAuth.pendingAuthResult
         if (pendingResultTask != null) {
             pendingResultTask
-                .addOnSuccessListener{
+                .addOnSuccessListener {
                     _authorizationUiState.value = UiStateManager.SuccessLogIn
-                    }
-                .addOnFailureListener{
+                }
+                .addOnFailureListener {
                     _authorizationUiState.value = UiStateManager.ErrorLogIn(it.message)
                 }
         } else {

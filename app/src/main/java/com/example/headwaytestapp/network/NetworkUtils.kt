@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 /**
- * Network Utility to detect availability or unavailability of Internet connection
+ * Network Utility to detect availability of Internet connection
  */
 object NetworkUtils : ConnectivityManager.NetworkCallback() {
 
