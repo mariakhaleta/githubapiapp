@@ -10,31 +10,31 @@
             android:id="@+id/pleaseSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:text="@string/please_signin_with_github"
-            android:textSize="24sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="50dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/githubLogo"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/github_logo"
-            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/github_logo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pleaseSignIn"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pleaseSignIn" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/tokenEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/type_github_email"
             android:layout_marginTop="20dp"
+            android:hint="@string/type_github_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/githubLogo" />
@@ -43,10 +43,10 @@
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/white"
             android:layout_marginTop="20dp"
+            android:backgroundTint="@color/black"
+            android:text="@string/login"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tokenEditText" />
