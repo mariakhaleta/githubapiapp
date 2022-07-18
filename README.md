@@ -34,6 +34,7 @@ Github Api App - it's simple Android application, to show latest Android tools. 
 
 ## Project Structure
 
+```
 com/example/headwaytestapp # Root Package
     .
     ├── authorization_view # All files related to Authorization View(Fragment, ViewModel, StateManager)
@@ -49,6 +50,7 @@ com/example/headwaytestapp # Root Package
     ├── repository         # Main Repository file
     |
     └── show_repos_view    # All files related to Repositories List View(Fragment, ViewModel, StateManager)
+```
 
 **To Dos:** Tests
 
