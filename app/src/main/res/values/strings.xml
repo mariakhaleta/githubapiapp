@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HeadwayTestApp</string>
+    <string name="login">Login</string>
+    <string name="type_github_email">Type Github email</string>
+    <string name="please_signin_with_github">Please, signin with GitHub</string>
+    <string name="no_language">No language</string>
+    <string name="see_latest_searched_repositories">See latest searched repositories</string>
+    <string name="search_repository_with_key">Search repository with key</string>
+    <string name="or">or</string>
+    <string name="no_saved_repositories_available">No saved repositories available</string>
 </resources>
