@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.authorization_view
+package com.example.headwaytestapp.presentation.authorization_view
 
 import android.os.Bundle
 import android.view.View
@@ -9,10 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.headwaytestapp.BaseFragment
+import com.example.headwaytestapp.presentation.BaseFragment
 import com.example.headwaytestapp.R
 import com.example.headwaytestapp.databinding.ViewAuthorizationBinding
-import com.example.headwaytestapp.network.NetworkUtils
+import com.example.headwaytestapp.data.network.NetworkUtils
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -64,7 +64,7 @@ class AuthorizationFragment : BaseFragment<ViewAuthorizationBinding>() {
                 saveCredsOpenRepositoryList()
             }
             is UiStateManager.ErrorLogIn -> {
-                showSignInError(state.message!!)
+                showSignInError(state.message)
             }
             is UiStateManager.InProgress -> {
                 //start login
@@ -81,7 +81,7 @@ class AuthorizationFragment : BaseFragment<ViewAuthorizationBinding>() {
                 saveCredsOpenRepositoryList()
             }
             .addOnFailureListener {
-                showSignInError(it.message!!)
+                showSignInError(it.message ?: "Error while log in Github")
             }
     }
 

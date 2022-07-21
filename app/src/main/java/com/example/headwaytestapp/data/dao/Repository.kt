@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.dao
+package com.example.headwaytestapp.data.dao
 
 import androidx.room.Entity
 import androidx.room.Ignore

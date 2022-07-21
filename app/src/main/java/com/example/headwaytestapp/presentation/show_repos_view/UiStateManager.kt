@@ -1,6 +1,6 @@
-package com.example.headwaytestapp.show_repos_view
+package com.example.headwaytestapp.presentation.show_repos_view
 
-import com.example.headwaytestapp.dao.Repository
+import com.example.headwaytestapp.data.dao.Repository
 
 
 sealed class UiStateManager {

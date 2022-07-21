@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.show_repos_view
+package com.example.headwaytestapp.presentation.show_repos_view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.headwaytestapp.R
-import com.example.headwaytestapp.dao.Repository
+import com.example.headwaytestapp.data.dao.Repository
 import com.example.headwaytestapp.databinding.RepositoryItemBinding
 
 

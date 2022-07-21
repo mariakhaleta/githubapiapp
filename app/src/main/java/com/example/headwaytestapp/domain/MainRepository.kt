@@ -1,9 +1,9 @@
-package com.example.headwaytestapp.repository
+package com.example.headwaytestapp.domain
 
-import com.example.headwaytestapp.dao.Repository
-import com.example.headwaytestapp.dao.RepositoryDAO
-import com.example.headwaytestapp.network.GithubApi
-import com.example.headwaytestapp.network.GithubSearchResponse
+import com.example.headwaytestapp.data.dao.Repository
+import com.example.headwaytestapp.data.dao.RepositoryDAO
+import com.example.headwaytestapp.data.network.GithubApi
+import com.example.headwaytestapp.data.network.GithubSearchResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response

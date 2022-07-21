@@ -1,9 +1,9 @@
-package com.example.headwaytestapp.latest_search_view
+package com.example.headwaytestapp.presentation.latest_search_view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.headwaytestapp.dao.Repository
-import com.example.headwaytestapp.repository.MainRepository
+import com.example.headwaytestapp.data.dao.Repository
+import com.example.headwaytestapp.domain.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
