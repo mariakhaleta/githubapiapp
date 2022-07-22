@@ -5,7 +5,7 @@
     app:startDestination="@id/authorizationFragment">
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="com.example.headwaytestapp.authorization_view.AuthorizationFragment"
+        android:name="com.example.headwaytestapp.presentation.authorization_view.AuthorizationFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/toShowRepositoryFragment"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/showRepositoryFragment"
-        android:name="com.example.headwaytestapp.show_repos_view.ShowRepositoryFragment"
+        android:name="com.example.headwaytestapp.presentation.show_repos_view.ShowRepositoryFragment"
         android:label="ShowRepositoryFragment" >
         <action android:id="@+id/toLatestSearchReposFragment"
             app:destination="@+id/latestSearchReposFragment"/>
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/latestSearchReposFragment"
-        android:name="com.example.headwaytestapp.latest_search_view.LatestSearchReposFragment"
+        android:name="com.example.headwaytestapp.presentation.latest_search_view.LatestSearchReposFragment"
         android:label="LatestSearchReposFragment">
         <action android:id="@+id/openBrowser" />
     </fragment>

@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.authorization_view
+package com.example.headwaytestapp.presentation.authorization_view
 
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
@@ -34,7 +34,8 @@ class AuthorizationViewModel @Inject() constructor() : ViewModel() {
                     _authorizationUiState.value = UiStateManager.SuccessLogIn
                 }
                 .addOnFailureListener {
-                    _authorizationUiState.value = UiStateManager.ErrorLogIn(it.message)
+                    _authorizationUiState.value = UiStateManager.ErrorLogIn(it.message
+                        ?: "Error while log in Github")
                 }
         } else {
             _authorizationUiState.value = UiStateManager.OpenLogIn(provider)

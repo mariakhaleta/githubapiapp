@@ -1,4 +1,4 @@
-package com.example.headwaytestapp
+package com.example.headwaytestapp.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

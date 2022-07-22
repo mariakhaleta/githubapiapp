@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.latest_search_view
+package com.example.headwaytestapp.presentation.latest_search_view
 
 import android.content.Intent
 import android.net.Uri
@@ -9,11 +9,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.headwaytestapp.BaseFragment
+import com.example.headwaytestapp.presentation.BaseFragment
 import com.example.headwaytestapp.R
-import com.example.headwaytestapp.dao.Repository
+import com.example.headwaytestapp.data.dao.Repository
 import com.example.headwaytestapp.databinding.ViewLatestSearchListBinding
-import com.example.headwaytestapp.show_repos_view.RepositoryAdapter
+import com.example.headwaytestapp.presentation.show_repos_view.RepositoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

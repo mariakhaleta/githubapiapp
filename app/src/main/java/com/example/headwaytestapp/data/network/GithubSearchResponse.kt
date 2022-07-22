@@ -1,6 +1,6 @@
-package com.example.headwaytestapp.network
+package com.example.headwaytestapp.data.network
 
-import com.example.headwaytestapp.dao.Repository
+import com.example.headwaytestapp.data.dao.Repository
 import com.google.gson.annotations.SerializedName
 
 data class GithubSearchResponse(

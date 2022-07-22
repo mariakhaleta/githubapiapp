@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.di
+package com.example.headwaytestapp.utils.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

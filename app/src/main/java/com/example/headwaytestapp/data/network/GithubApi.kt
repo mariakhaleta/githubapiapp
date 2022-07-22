@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.network
+package com.example.headwaytestapp.data.network
 
 import retrofit2.Response
 import retrofit2.http.GET

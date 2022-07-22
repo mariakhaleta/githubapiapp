@@ -1,10 +1,10 @@
-package com.example.headwaytestapp.di
+package com.example.headwaytestapp.utils.di
 
 import android.content.Context
 import androidx.room.Room
 import com.example.headwaytestapp.BuildConfig
-import com.example.headwaytestapp.dao.AppDatabase
-import com.example.headwaytestapp.network.GithubApi
+import com.example.headwaytestapp.data.dao.AppDatabase
+import com.example.headwaytestapp.data.network.GithubApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

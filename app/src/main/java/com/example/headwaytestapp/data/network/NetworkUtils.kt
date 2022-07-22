@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.network
+package com.example.headwaytestapp.data.network
 
 import android.content.Context
 import android.net.ConnectivityManager

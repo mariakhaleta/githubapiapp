@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.dao
+package com.example.headwaytestapp.data.dao
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,4 +1,4 @@
-package com.example.headwaytestapp.show_repos_view
+package com.example.headwaytestapp.presentation.show_repos_view
 
 import android.content.Intent
 import android.net.Uri
@@ -18,11 +18,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.headwaytestapp.BaseFragment
+import com.example.headwaytestapp.presentation.BaseFragment
 import com.example.headwaytestapp.R
-import com.example.headwaytestapp.dao.Repository
+import com.example.headwaytestapp.data.dao.Repository
 import com.example.headwaytestapp.databinding.ViewShowRepositoryBinding
-import com.example.headwaytestapp.network.NetworkUtils
+import com.example.headwaytestapp.data.network.NetworkUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -32,7 +32,6 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
 
     private val viewModel: RepositoryListViewModel by viewModels()
     private val adapter = RepositoryAdapter(this::onItemClicked)
-    private var currentPage = 1
     private var currentSearchKey = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +46,7 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
                     if (!currentSearchKey.equals(v?.text.toString())) {
                         viewModel.emptyResult()
                     } // clear result before new value
-                    viewModel.searchRepos(v?.text.toString(), currentPage)
+                    viewModel.searchRepos(v?.text.toString())
                     currentSearchKey = v?.text.toString()
                     return true
                 }
@@ -57,15 +56,8 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
 
         binding?.recyclerview?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0) {
-                    val totalItemCount: Int? = recyclerView.layoutManager?.itemCount
-                    if (totalItemCount != null) {
-                        if (latestVisibleItem() == totalItemCount - 1) {
-                            currentPage += 2
-                            viewModel.searchRepos(currentSearchKey, currentPage)
-                        }
-                    }
-                }
+                val totalItemCount: Int? = recyclerView.layoutManager?.itemCount
+                viewModel.pagination(totalItemCount, dy, latestVisibleItem(), currentSearchKey)
             }
         }) // Pagination
 
@@ -81,7 +73,6 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
             }
         }
     }
-
 
     private fun latestVisibleItem(): Int {
         val layoutManager = binding?.recyclerview?.layoutManager as LinearLayoutManager
@@ -105,6 +96,7 @@ class ShowRepositoryFragment : BaseFragment<ViewShowRepositoryBinding>() {
                 Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
                 binding?.progressBar?.visibility = GONE
             }
+            is UiStateManager.Initial -> {}
         }
     }
 
