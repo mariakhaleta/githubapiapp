@@ -37,19 +37,26 @@ Github Api App - it's simple Android application, to show latest Android tools. 
 ```
 com/example/headwaytestapp # Root Package
     .
-    ├── authorization_view # All files related to Authorization View(Fragment, ViewModel, StateManager)
     |
-    ├── dao                # DAO related files
+    ├── data                         # data related files
     | 
-    ├── di                 # DI related files
+    ├──────────── dao                # DAO related files
+    | 
+    ├──────────── network            # All files related to Network
     |
-    ├── latest_search_view # All files related to Latest Search View(Fragment, ViewModel)
+    ├── domain                       # Domain layer files
+    | 
+    ├── utils                        # Utils and DI related files
+    | 
+    ├──────────── di                 # DI related files
     |
-    ├── network            # All files related to Network
+    ├── presentation                 # Presentation layer files
     |
-    ├── repository         # Main Repository file
+    ├──────────── authorization_view # All files related to Authorization View(Fragment, ViewModel, StateManager)
     |
-    └── show_repos_view    # All files related to Repositories List View(Fragment, ViewModel, StateManager)
+    ├──────────── latest_search_view # All files related to Latest Search View(Fragment, ViewModel)
+    |
+    └──────────── show_repos_view    # All files related to Repositories List View(Fragment, ViewModel, StateManager)
 ```
 
 **To Dos:** Tests
